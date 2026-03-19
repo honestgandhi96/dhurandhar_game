@@ -1,0 +1,147 @@
+/* Fonts are loaded via next/font in layout.tsx — CSS vars set on .game-shell */
+:root {
+  --g: #00ff41;
+  --g-dim: #00aa2a;
+  --amber: #ffaa00;
+  --red: #ff2020;
+  --border: #1a2a1a;
+  --bg: #0a0a0a;
+}
+
+/* ── Flicker ── */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92%       { opacity: 1; }
+  93%       { opacity: 0.97; }
+  94%       { opacity: 1; }
+  96%       { opacity: 0.98; }
+}
+.game-shell { animation: flicker 8s infinite; }
+
+/* ── Shake ── */
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  15%     { transform: translateX(-8px); }
+  30%     { transform: translateX(8px); }
+  50%     { transform: translateX(-6px); }
+  70%     { transform: translateX(6px); }
+  88%     { transform: translateX(-2px); }
+}
+.shake { animation: shake 0.4s ease-in-out; }
+
+/* ── Dossier card shake (low integrity) ── */
+@keyframes dossier-shake {
+  0%,100% { transform: translateX(0) rotate(0deg); }
+  25%     { transform: translateX(-3px) rotate(-0.4deg); }
+  75%     { transform: translateX(3px) rotate(0.4deg); }
+}
+.dossier-danger { animation: dossier-shake 0.4s ease-in-out infinite; }
+
+/* ── Cover Blown invert ── */
+@keyframes cover-invert {
+  0%  { filter: invert(1) brightness(2); }
+  100%{ filter: invert(0); }
+}
+.cover-blown-anim { animation: cover-invert 0.2s ease-out forwards; }
+
+/* ── Green flash ── */
+@keyframes green-flash {
+  0%   { opacity: 0; }
+  20%  { opacity: 0.18; }
+  100% { opacity: 0; }
+}
+.green-flash-overlay { animation: green-flash 0.5s ease-out forwards; }
+
+/* ── Red flash ── */
+@keyframes red-flash {
+  0%   { opacity: 0; }
+  30%  { opacity: 0.45; }
+  100% { opacity: 0; }
+}
+.red-flash-overlay { animation: red-flash 0.35s ease-out forwards; }
+
+/* ── Score pop ── */
+@keyframes score-pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+.score-pop { animation: score-pop 0.3s ease-out; }
+
+/* ── Cover integrity pulses ── */
+@keyframes pulse-green  { 0%,100%{opacity:1} 50%{opacity:0.7} }
+@keyframes pulse-amber  { 0%,100%{opacity:1} 50%{opacity:0.55} }
+@keyframes pulse-red    { 0%,100%{opacity:1} 30%{opacity:0.35} }
+
+.ci-bar-green { animation: pulse-green 2s ease-in-out infinite; }
+.ci-bar-amber { animation: pulse-amber 1.2s ease-in-out infinite; }
+.ci-bar-red   { animation: pulse-red   0.6s ease-in-out infinite; }
+
+/* ── Heartbeat (mission 7 dossier) ── */
+@keyframes heartbeat {
+  0%,100% { transform: scale(1.0); }
+  50%     { transform: scale(1.004); }
+}
+.heartbeat { animation: heartbeat 1s ease-in-out infinite; }
+
+/* ── Glitch (identity transition) ── */
+@keyframes glitch-clip1 {
+  0%,100% { clip-path: inset(0 0 95% 0); transform: translateX(-3px); }
+  25%     { clip-path: inset(30% 0 50% 0); transform: translateX(3px); }
+  50%     { clip-path: inset(65% 0 15% 0); transform: translateX(-2px); }
+  75%     { clip-path: inset(10% 0 75% 0); transform: translateX(2px); }
+}
+@keyframes glitch-clip2 {
+  0%,100% { clip-path: inset(55% 0 25% 0); transform: translateX(3px); }
+  25%     { clip-path: inset(15% 0 65% 0); transform: translateX(-3px); }
+  50%     { clip-path: inset(75% 0 5% 0); transform: translateX(2px); }
+  75%     { clip-path: inset(40% 0 40% 0); transform: translateX(-2px); }
+}
+.glitch-layer1 {
+  position: absolute; inset: 0;
+  color: #ff2020;
+  animation: glitch-clip1 0.12s steps(1) infinite;
+}
+.glitch-layer2 {
+  position: absolute; inset: 0;
+  color: #00ccff;
+  animation: glitch-clip2 0.18s steps(1) infinite;
+}
+
+/* ── Typewriter cursor ── */
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.typewriter-cursor::after {
+  content: '█';
+  animation: blink 0.8s infinite;
+  color: var(--g);
+}
+
+/* ── Dossier paper styles ── */
+.dossier-act1 {
+  background: #e8dfc0;
+  filter: none;
+}
+.dossier-act2 {
+  background: #d4c49a;
+  filter: sepia(0.3) contrast(0.95);
+}
+.dossier-act3 {
+  background: #c8b47a;
+  filter: sepia(0.6) contrast(0.9) brightness(0.95);
+  clip-path: polygon(
+    0 0, 100% 0, 100% 94%,
+    97% 96%, 94% 94%, 91% 97%, 88% 94%, 85% 96%, 82% 94%,
+    79% 97%, 76% 94%, 73% 96%, 70% 94%, 67% 97%, 64% 94%,
+    61% 96%, 58% 94%, 55% 97%, 52% 94%, 49% 96%, 46% 94%,
+    43% 97%, 40% 94%, 37% 96%, 34% 94%, 31% 97%, 28% 94%,
+    25% 96%, 22% 94%, 19% 97%, 16% 94%, 13% 96%, 10% 94%,
+    7% 97%, 4% 94%, 0 96%
+  );
+}
+
+/* ── Fade in ── */
+@keyframes fade-in { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { animation: fade-in 0.35s ease-out both; }
+
+/* ── Stamp fade ── */
+.classified-stamp-act3 { opacity: 0.5 !important; }
