@@ -7,7 +7,6 @@ import ProgressBar from "./components/ProgressBar";
 import DossierCard from "./components/DossierCard";
 import CoverIntegrityMeter from "./components/CoverIntegrityMeter";
 import CipherBlock from "./components/CipherBlock";
-import DecoderReference from "./components/DecoderReference";
 import HintPanel from "./components/HintPanel";
 import MultipleChoice from "./components/MultipleChoice";
 import FreeTextInput from "./components/FreeTextInput";
@@ -591,9 +590,8 @@ export default function GamePage() {
           {/* Cipher block — rendered inside dossier for terminal aesthetic */}
         </DossierCard>
 
-        {/* Cipher + decoder outside the dossier (terminal section) */}
+        {/* Cipher outside the dossier (terminal section) */}
         <CipherBlock encoded={mission.encoded} label={mission.cipherLabel} />
-        <DecoderReference title={mission.decoderTitle} lines={mission.decoderLines} />
 
         {/* Hint */}
         <HintPanel
