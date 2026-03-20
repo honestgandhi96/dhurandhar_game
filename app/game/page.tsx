@@ -539,7 +539,7 @@ export default function GamePage() {
         style={{
           maxWidth: 560,
           margin: "0 auto",
-          padding: "16px 16px 120px",
+          padding: "16px 16px calc(140px + env(safe-area-inset-bottom))",
         }}
       >
         {/* Mission header */}
