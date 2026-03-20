@@ -467,7 +467,7 @@ export default function GamePage() {
   return (
     <div
       className="game-shell"
-      style={{ minHeight: "100dvh", backgroundColor: "#0a0a0a" }}
+      style={{ height: "100dvh", backgroundColor: "#0a0a0a", display: "flex", flexDirection: "column" }}
     >
       {/* Flash overlays */}
       {greenFlash && (
@@ -534,119 +534,114 @@ export default function GamePage() {
       />
       <ProgressBar completedMissions={currentMission} act={mission.act} />
 
-      <div
-        style={{
-          maxWidth: 560,
-          margin: "0 auto",
-          padding: "16px 16px calc(180px + env(safe-area-inset-bottom))",
-        }}
-      >
-        {/* Mission header */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 4,
-            fontFamily: "var(--font-mono)",
-            fontSize: 10,
-            color: "#00aa2a",
-            letterSpacing: 1,
-          }}
-        >
-          <span>MISSION {mission.id} OF 7</span>
-          <span style={{ color: "#ffaa00" }}>{mission.difficultyLabel}</span>
-        </div>
-
-        {/* Dossier card */}
-        <DossierCard
-          act={mission.act}
-          missionRef={mission.ref}
-          shake={shake}
-          coverBlown={coverBlown}
-          mission7={currentMission === 6}
-          lowIntegrity={lowIntegrity}
-        >
-          {/* Cover integrity meter */}
-          <CoverIntegrityMeter
-            integrity={coverIntegrity}
-            mission7={currentMission === 6}
-            dossierShaking={lowIntegrity}
-          />
-
-          {/* Mission brief */}
+      {/* Scrollable mission content */}
+      <div style={{ flex: 1, overflowY: "auto", WebkitOverflowScrolling: "touch" }}>
+        <div style={{ maxWidth: 560, margin: "0 auto", padding: "16px" }}>
+          {/* Mission header */}
           <div
             style={{
-              fontFamily: "var(--font-dossier)",
-              fontSize: 13,
-              color: "#3a2a0a",
-              lineHeight: 1.8,
-              margin: "14px 0 12px",
-            }}
-          >
-            {mission.brief}
-          </div>
-
-          {/* Cipher block — rendered inside dossier for terminal aesthetic */}
-        </DossierCard>
-
-        {/* Cipher outside the dossier (terminal section) */}
-        <CipherBlock encoded={mission.encoded} label={mission.cipherLabel} />
-
-        {/* Hint */}
-        <HintPanel
-          hintText={mission.hintText}
-          revealed={hintRevealed}
-          hintsRemaining={hintsRemaining}
-          onReveal={handleHint}
-        />
-
-        {/* Answer input */}
-        {mission.choices ? (
-          <MultipleChoice
-            choices={shuffledChoices}
-            onSelect={handleSubmit}
-            disabled={isSubmitting || showFeedback || coverBlown}
-            shake={shake}
-          />
-        ) : (
-          <FreeTextInput
-            onSubmit={handleSubmit}
-            disabled={isSubmitting || showFeedback || coverBlown}
-            shake={shake}
-          />
-        )}
-
-        {/* Mission 7 special label */}
-        {currentMission === 6 && (
-          <div
-            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 4,
               fontFamily: "var(--font-mono)",
               fontSize: 10,
-              color: "#ffaa00",
-              textAlign: "center",
-              marginTop: 12,
-              letterSpacing: 2,
+              color: "#00aa2a",
+              letterSpacing: 1,
             }}
           >
-            ⚠ FINAL TRANSMISSION — NO PASSIVE DRAIN — NO WAY BACK
+            <span>MISSION {mission.id} OF 7</span>
+            <span style={{ color: "#ffaa00" }}>{mission.difficultyLabel}</span>
           </div>
-        )}
+
+          {/* Dossier card */}
+          <DossierCard
+            act={mission.act}
+            missionRef={mission.ref}
+            shake={shake}
+            coverBlown={coverBlown}
+            mission7={currentMission === 6}
+            lowIntegrity={lowIntegrity}
+          >
+            {/* Cover integrity meter */}
+            <CoverIntegrityMeter
+              integrity={coverIntegrity}
+              mission7={currentMission === 6}
+              dossierShaking={lowIntegrity}
+            />
+
+            {/* Mission brief */}
+            <div
+              style={{
+                fontFamily: "var(--font-dossier)",
+                fontSize: 13,
+                color: "#3a2a0a",
+                lineHeight: 1.8,
+                margin: "14px 0 12px",
+              }}
+            >
+              {mission.brief}
+            </div>
+          </DossierCard>
+
+          {/* Cipher (terminal section) */}
+          <CipherBlock encoded={mission.encoded} label={mission.cipherLabel} />
+
+          {/* Hint */}
+          <HintPanel
+            hintText={mission.hintText}
+            revealed={hintRevealed}
+            hintsRemaining={hintsRemaining}
+            onReveal={handleHint}
+          />
+        </div>
       </div>
 
-      {/* Identity bar bottom (playing phase) */}
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: "#0a0a0a",
-          borderTop: "1px solid #1a2a1a",
-          padding: "6px 16px max(8px, env(safe-area-inset-bottom))",
-        }}
-      >
-        <IdentityBar progress={identityProgress} />
+      {/* Always-visible bottom: answers + identity bar */}
+      <div style={{ flexShrink: 0, backgroundColor: "#0a0a0a" }}>
+        <div style={{ maxWidth: 560, margin: "0 auto", padding: "8px 16px 4px" }}>
+          {/* Answer input */}
+          {mission.choices ? (
+            <MultipleChoice
+              choices={shuffledChoices}
+              onSelect={handleSubmit}
+              disabled={isSubmitting || showFeedback || coverBlown}
+              shake={shake}
+            />
+          ) : (
+            <FreeTextInput
+              onSubmit={handleSubmit}
+              disabled={isSubmitting || showFeedback || coverBlown}
+              shake={shake}
+            />
+          )}
+
+          {/* Mission 7 special label */}
+          {currentMission === 6 && (
+            <div
+              style={{
+                fontFamily: "var(--font-mono)",
+                fontSize: 10,
+                color: "#ffaa00",
+                textAlign: "center",
+                marginTop: 8,
+                letterSpacing: 2,
+              }}
+            >
+              ⚠ FINAL TRANSMISSION — NO PASSIVE DRAIN — NO WAY BACK
+            </div>
+          )}
+        </div>
+
+        {/* Identity bar */}
+        <div
+          style={{
+            borderTop: "1px solid #1a2a1a",
+            padding: "6px 16px max(8px, env(safe-area-inset-bottom))",
+          }}
+        >
+          <IdentityBar progress={identityProgress} />
+        </div>
       </div>
 
       {/* Feedback overlay */}
