@@ -9,7 +9,7 @@ interface Props {
 
 export default function MultipleChoice({ choices, onSelect, disabled, shake }: Props) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10, margin: "12px 0" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 6, margin: "8px 0" }}>
       <div
         style={{
           fontFamily: "var(--font-mono)",
@@ -28,16 +28,16 @@ export default function MultipleChoice({ choices, onSelect, disabled, shake }: P
           disabled={disabled}
           className={shake ? "shake" : ""}
           style={{
-            minHeight: 48,
+            minHeight: 38,
             backgroundColor: "#0d2a0d",
             border: "1px solid #2a5a2a",
             borderRadius: 4,
             color: disabled ? "#006622" : "#00ff41",
             fontFamily: "var(--font-mono)",
-            fontSize: 13,
+            fontSize: 12,
             letterSpacing: 2,
             cursor: disabled ? "not-allowed" : "pointer",
-            padding: "10px 16px",
+            padding: "6px 14px",
             textAlign: "left",
             transition: "border-color 0.15s, background-color 0.15s",
           }}

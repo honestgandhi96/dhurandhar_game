@@ -14,7 +14,6 @@ import FeedbackOverlay, {
   type FeedbackData,
 } from "./components/FeedbackOverlay";
 import HandlerMessage from "./components/HandlerMessage";
-import IdentityBar from "./components/IdentityBar";
 import MidGameShare from "./components/MidGameShare";
 import EndScreen from "./components/EndScreen";
 
@@ -534,9 +533,9 @@ export default function GamePage() {
       />
       <ProgressBar completedMissions={currentMission} act={mission.act} />
 
-      {/* Scrollable mission content */}
-      <div style={{ flex: 1, overflowY: "auto", WebkitOverflowScrolling: "touch" }}>
-        <div style={{ maxWidth: 560, margin: "0 auto", padding: "16px" }}>
+      {/* Scrollable dossier section */}
+      <div style={{ flex: 1, minHeight: 80, overflowY: "auto", WebkitOverflowScrolling: "touch" }}>
+        <div style={{ maxWidth: 560, margin: "0 auto", padding: "12px 16px 8px" }}>
           {/* Mission header */}
           <div
             style={{
@@ -563,14 +562,11 @@ export default function GamePage() {
             mission7={currentMission === 6}
             lowIntegrity={lowIntegrity}
           >
-            {/* Cover integrity meter */}
             <CoverIntegrityMeter
               integrity={coverIntegrity}
               mission7={currentMission === 6}
               dossierShaking={lowIntegrity}
             />
-
-            {/* Mission brief */}
             <div
               style={{
                 fontFamily: "var(--font-dossier)",
@@ -583,11 +579,13 @@ export default function GamePage() {
               {mission.brief}
             </div>
           </DossierCard>
+        </div>
+      </div>
 
-          {/* Cipher (terminal section) */}
+      {/* Cipher + hint — always visible */}
+      <div style={{ flexShrink: 0, borderTop: "1px solid #1a3a1a", backgroundColor: "#0a0a0a" }}>
+        <div style={{ maxWidth: 560, margin: "0 auto", padding: "0 16px" }}>
           <CipherBlock encoded={mission.encoded} label={mission.cipherLabel} />
-
-          {/* Hint */}
           <HintPanel
             hintText={mission.hintText}
             revealed={hintRevealed}
@@ -597,10 +595,9 @@ export default function GamePage() {
         </div>
       </div>
 
-      {/* Always-visible bottom: answers + identity bar */}
+      {/* Answers — always visible */}
       <div style={{ flexShrink: 0, backgroundColor: "#0a0a0a" }}>
-        <div style={{ maxWidth: 560, margin: "0 auto", padding: "8px 16px 4px" }}>
-          {/* Answer input */}
+        <div style={{ maxWidth: 560, margin: "0 auto", padding: `4px 16px max(12px, env(safe-area-inset-bottom))` }}>
           {mission.choices ? (
             <MultipleChoice
               choices={shuffledChoices}
@@ -615,8 +612,6 @@ export default function GamePage() {
               shake={shake}
             />
           )}
-
-          {/* Mission 7 special label */}
           {currentMission === 6 && (
             <div
               style={{
@@ -624,23 +619,14 @@ export default function GamePage() {
                 fontSize: 10,
                 color: "#ffaa00",
                 textAlign: "center",
-                marginTop: 8,
+                marginTop: 6,
+                marginBottom: 4,
                 letterSpacing: 2,
               }}
             >
               ⚠ FINAL TRANSMISSION — NO PASSIVE DRAIN — NO WAY BACK
             </div>
           )}
-        </div>
-
-        {/* Identity bar */}
-        <div
-          style={{
-            borderTop: "1px solid #1a2a1a",
-            padding: "6px 16px max(8px, env(safe-area-inset-bottom))",
-          }}
-        >
-          <IdentityBar progress={identityProgress} />
         </div>
       </div>
 
