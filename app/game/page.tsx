@@ -7,6 +7,7 @@ import ProgressBar from "./components/ProgressBar";
 import DossierCard from "./components/DossierCard";
 import CoverIntegrityMeter from "./components/CoverIntegrityMeter";
 import CipherBlock from "./components/CipherBlock";
+import DecoderReference from "./components/DecoderReference";
 import HintPanel from "./components/HintPanel";
 import MultipleChoice from "./components/MultipleChoice";
 import FreeTextInput from "./components/FreeTextInput";
@@ -586,6 +587,7 @@ export default function GamePage() {
       <div style={{ flexShrink: 0, borderTop: "1px solid #1a3a1a", backgroundColor: "#0a0a0a" }}>
         <div style={{ maxWidth: 560, margin: "0 auto", padding: "0 16px" }}>
           <CipherBlock encoded={mission.encoded} label={mission.cipherLabel} />
+          <DecoderReference title={mission.decoderTitle} lines={mission.decoderLines} />
           <HintPanel
             hintText={mission.hintText}
             revealed={hintRevealed}
