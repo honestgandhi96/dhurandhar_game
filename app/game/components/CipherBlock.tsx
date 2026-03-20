@@ -25,7 +25,7 @@ export default function CipherBlock({ encoded, label }: Props) {
           backgroundColor: "#0d1a0d",
           border: "1px solid #1a3a1a",
           borderRadius: 4,
-          padding: "20px 16px",
+          padding: "12px 16px",
           fontFamily: "var(--font-mono)",
           fontSize: "clamp(22px, 6.5vw, 36px)",
           fontWeight: 700,

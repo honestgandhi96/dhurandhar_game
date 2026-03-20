@@ -42,18 +42,18 @@ export default function HintPanel({
       style={{
         display: "block",
         width: "100%",
-        minHeight: 48,
+        minHeight: 32,
         backgroundColor: "transparent",
         border: `1px solid ${hintsRemaining > 0 ? "#ffaa00" : "#333"}`,
         borderRadius: 4,
         color: hintsRemaining > 0 ? "#ffaa00" : "#444",
         fontFamily: "var(--font-ui)",
         fontWeight: 600,
-        fontSize: 13,
+        fontSize: 11,
         letterSpacing: 2,
         cursor: hintsRemaining > 0 ? "pointer" : "not-allowed",
         transition: "background-color 0.15s",
-        margin: "8px 0",
+        margin: "6px 0",
       }}
       onMouseEnter={(e) => {
         if (hintsRemaining > 0)

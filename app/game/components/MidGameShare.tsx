@@ -124,15 +124,18 @@ export default function MidGameShare({ score, onContinue }: Props) {
         <button
           onClick={onContinue}
           style={{
+            display: "block",
+            width: "100%",
+            minHeight: 48,
             background: "none",
-            border: "none",
-            color: "#00661a",
+            border: "1px solid #1a4a1a",
+            borderRadius: 4,
+            color: "#00cc35",
             fontFamily: "var(--font-mono)",
-            fontSize: 11,
+            fontSize: 13,
             letterSpacing: 2,
             cursor: "pointer",
-            textDecoration: "underline",
-            padding: "8px",
+            padding: "12px",
           }}
         >
           SKIP — CONTINUE MISSION
