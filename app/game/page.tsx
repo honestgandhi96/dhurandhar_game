@@ -539,7 +539,7 @@ export default function GamePage() {
         style={{
           maxWidth: 560,
           margin: "0 auto",
-          padding: "16px 16px 40px",
+          padding: "16px 16px 120px",
         }}
       >
         {/* Mission header */}
@@ -645,7 +645,7 @@ export default function GamePage() {
           right: 0,
           backgroundColor: "#0a0a0a",
           borderTop: "1px solid #1a2a1a",
-          padding: "6px 16px 8px",
+          padding: "6px 16px max(8px, env(safe-area-inset-bottom))",
         }}
       >
         <IdentityBar progress={identityProgress} />
