@@ -25,15 +25,17 @@ export default function CipherBlock({ encoded, label }: Props) {
           backgroundColor: "#0d1a0d",
           border: "1px solid #1a3a1a",
           borderRadius: 4,
-          padding: "14px 16px",
+          padding: "24px 16px",
           fontFamily: "var(--font-mono)",
-          fontSize: 20,
+          fontSize: 36,
+          fontWeight: 700,
           color: "#00ff41",
-          letterSpacing: 4,
+          letterSpacing: 6,
           textAlign: "center",
           wordBreak: "break-all",
-          textShadow: "0 0 8px rgba(0,255,65,0.4)",
-          boxShadow: "inset 0 0 12px rgba(0,255,65,0.06)",
+          textShadow: "0 0 16px rgba(0,255,65,0.6), 0 0 32px rgba(0,255,65,0.2)",
+          boxShadow: "inset 0 0 24px rgba(0,255,65,0.08), 0 0 0 1px rgba(0,255,65,0.1)",
+          lineHeight: 1.3,
         }}
       >
         {encoded}

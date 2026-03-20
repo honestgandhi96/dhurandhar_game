@@ -10,6 +10,17 @@ interface Props {
 export default function MultipleChoice({ choices, onSelect, disabled, shake }: Props) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10, margin: "12px 0" }}>
+      <div
+        style={{
+          fontFamily: "var(--font-mono)",
+          fontSize: 10,
+          color: "#00aa2a",
+          letterSpacing: 2,
+          marginBottom: 2,
+        }}
+      >
+        SELECT YOUR ANSWER:
+      </div>
       {choices.map((choice) => (
         <button
           key={choice}
